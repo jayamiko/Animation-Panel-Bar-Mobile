@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        --width-button: 60px;
+        --height-button: 60px;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+
+      .box {
+        position: relative;
+        width: 100vw;
+        border: solid black 2px;
+        display: flex;
+        flex-direction: row;
+      }
+
+      .circle-button {
+        width: var(--width-button);
+        height: var(--height-button);
+        background-color: #007bff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border: solid red 2px;
+        z-index: 10;
+      }
+
+      .circle {
+        width: 40px;
+        height: 40px;
+        background-color: orange;
+        border-radius: 50%;
+      }
+
+      .social-media-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: absolute;
+        left: 30px;
+        width: 0;
+        height: 100%;
+        transition: width 1s ease-out;
+        background-color: darkred;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 0px 25px 25px 0px;
+        padding-left: 10px;
+        padding-right: 10px;
+        overflow: hidden;
+      }
+
+      .social-media-container.show {
+        width: calc(100% - 60px);
+      }
+
+      .social-media-container.show .media-icons {
+        pointer-events: all;
+      }
+
+      .media-icons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 20px;
+        pointer-events: none;
+      }
+
+      .media-icon {
+        width: 30px;
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 30px;
+        background-color: #007bff;
+        border-radius: 50%;
+      }
+    </style>
+    <title>Social Media Widgets</title>
+  </head>
+  <body>
+    <div class="box">
+      <div class="circle-button" id="toggle-button">
+        <div class="circle"></div>
+      </div>
+      <div class="social-media-container" id="social-container">
+        <div class="media-icons">
+          <div class="media-icon"></div>
+          <div class="media-icon"></div>
+          <div class="media-icon"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const toggleButton = document.getElementById("toggle-button");
+      const socialContainer = document.getElementById("social-container");
+
+      toggleButton.addEventListener("click", () => {
+        socialContainer.classList.remove("hide");
+        socialContainer.classList.toggle("show");
+      });
+
+      const mediaIcons = document.querySelectorAll(".media-icon");
+      mediaIcons.forEach((icon) => {
+        icon.addEventListener("click", () => {
+          socialContainer.classList.remove("show");
+          socialContainer.classList.add("hide");
+        });
+      });
+    </script>
+  </body>
+</html>
